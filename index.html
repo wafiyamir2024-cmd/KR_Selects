@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090c10" />
+    <meta name="description" content="Choose your legend. An interactive Kamen Rider character select." />
+    <title>KR Arena — Character Select</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/lineup.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true"><div class="ambient-grid"></div><div class="ambient-beam beam-blue"></div><div class="ambient-beam beam-red"></div></div>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="KR Arena home">
+        <svg class="brand-mark" viewBox="0 0 44 48" aria-hidden="true"><path d="M5 5h9v16L29 5h12L22 25l19 18H28L14 29v14H5Z" fill="currentColor"/><path d="m29 5-7 8h10l7-8Z" fill="#faf7ee"/></svg>
+        <span>KR<span class="brand-light">ARENA</span><small>THE RIDER MULTIVERSE</small></span>
+      </a>
+      <div class="topbar-section nav-tabs" role="tablist" aria-label="Roster views"><button id="select-tab" class="nav-tab nav-active" role="tab" type="button" aria-selected="true" aria-controls="select-view" tabindex="0">CHARACTER SELECT</button><button id="lineup-tab" class="nav-tab" role="tab" type="button" aria-selected="false" aria-controls="lineup-view" tabindex="-1">RIDER LINEUP</button></div>
+      <div class="topbar-tools">
+        <button id="sound-toggle" class="icon-button sound-toggle" type="button" aria-label="Mute voice and sound" aria-pressed="true" title="Toggle voice and sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5Zm4 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span>SOUND ON</span></button>
+        <span class="tool-divider"></span>
+        <button id="fullscreen-toggle" class="icon-button" type="button" aria-label="Enter fullscreen" title="Toggle fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></svg></button>
+      </div>
+    </header>
+
+    <main class="arena-shell">
+      <section class="arena-heading" aria-labelledby="page-title">
+        <div class="eyebrow"><span></span> A LEGACY WITHOUT LIMITS <span></span></div>
+        <h1 id="page-title">CHOOSE YOUR <em>RIDER.</em></h1>
+        <p>Different eras. One arena. Make your choice.</p>
+        <div class="heading-index" aria-hidden="true">SELECTION PROTOCOL <b>PLAYER 01</b></div>
+      </section>
+
+      <section id="select-view" role="tabpanel" aria-labelledby="select-tab">
+      <div class="selection-layout">
+        <section id="player-1" class="player-panel player-one is-active" aria-label="Player 1 selection">
+          <button class="player-tab" type="button" aria-label="Change Player 1 selection"><span class="player-number">P1</span><span>PLAYER ONE</span><span class="player-state">SELECTING</span></button>
+          <div class="fighter-stage">
+            <div class="stage-corner corner-top"></div><div class="stage-corner corner-bottom"></div>
+            <div class="stage-watermark" aria-hidden="true">01</div><div class="stage-orbit" aria-hidden="true"></div><div class="stage-line" aria-hidden="true"></div>
+            <span class="stage-coordinate" aria-hidden="true">RIDER SYSTEM / 01</span>
+            <div class="fighter-image-wrap"><img class="fighter-image" alt="" hidden /></div>
+            <div class="image-unavailable" hidden><span>◇</span>ARTWORK UNAVAILABLE</div>
+            <div class="stage-base" aria-hidden="true"></div>
+            <div class="stage-status"><span class="status-dot"></span><span class="stage-status-text">AWAITING RIDER</span><span class="stage-cross">+</span></div>
+          </div>
+          <div class="fighter-info"><div class="fighter-series">SELECT A CHARACTER</div><h2 class="fighter-name">—</h2><div class="fighter-detail"><span class="fighter-index">NO. —</span><span class="fighter-class">RIDER SELECT</span></div></div>
+          <div class="player-bottomline"><span></span><span>THE FIRST MOVE IS YOURS</span><span></span></div>
+        </section>
+
+        <section class="roster-panel" aria-label="Character roster">
+          <div class="roster-heading"><h2><span class="section-line"></span> THE ROSTER</h2><span class="roster-total"><b id="total-count">00</b> CHARACTERS</span></div>
+          <div class="roster-tools">
+            <label class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="roster-search" type="search" autocomplete="off" placeholder="Find your rider…" aria-label="Search characters" /><kbd>/</kbd></label>
+            <label class="series-field"><span class="sr-only">Filter by series</span><select id="series-filter"><option value="all">All series</option></select><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></label>
+          </div>
+          <div class="roster-subheading"><span id="filter-summary">ALL RIDERS</span><span id="roster-range">CONNECTING TO ROSTER</span></div>
+          <div class="hex-field" id="hex-field">
+            <div class="roster-reticle" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div id="hex-grid" class="hex-grid" role="group" aria-label="Choose a character"></div>
+            <div id="roster-message" class="roster-message" role="status"><span class="loading-ring"></span><h3>ASSEMBLING THE LEGENDS</h3><p>Loading your character roster…</p></div>
+          </div>
+          <div class="roster-guide"><span class="roster-hint"><span class="hint-dot"></span><span id="selection-hint">HOVER TO DISCOVER · CLICK TO SELECT</span></span><span id="scroll-hint" class="roster-hint" hidden>SCROLL TO EXPLORE ↓</span></div>
+          <div class="selection-divider"><span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 10-9 10L3 12Z"/><path d="M8 12h8m-4-4v8"/></svg><span></span></div>
+          <div class="selection-actions"><button id="random-select" class="random-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 4-3 6-6s4-6 6-6h3m-4-4 4 4-4 4"/></svg><span>RANDOM</span></button><button id="confirm-selection" class="confirm-button" type="button"><span>CONFIRM RIDER</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg></button></div>
+          <p class="turn-indicator" id="turn-indicator"><span class="status-dot"></span> PLAYER ONE IS SELECTING</p>
+        </section>
+      </div>
+      </section>
+
+      <section id="lineup-view" class="lineup-view" role="tabpanel" aria-labelledby="lineup-tab" hidden>
+        <div class="lineup-toolbar"><div class="lineup-heading"><span class="section-line"></span><h2>THE COMPLETE LINEUP</h2></div><div class="lineup-toolbar-actions"><div class="lineup-totals"><strong id="lineup-count">00</strong><small>CHARACTERS</small></div><button id="lineup-download" class="lineup-download" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>DOWNLOAD PNG</span></button></div></div>
+        <p class="lineup-caption">Start at the front. Discover every era, from bottom to top.</p>
+        <p id="lineup-download-status" class="lineup-download-status" role="status" aria-live="polite" hidden></p>
+        <div id="lineup-scroll" class="lineup-scroll" aria-label="Full-body character lineup">
+          <div id="lineup-canvas" class="lineup-canvas" role="group" aria-label="Characters ordered from the bottom upward"></div>
+          <div id="lineup-empty" class="lineup-empty" role="status"><h3>ASSEMBLING THE LINEUP</h3><p>Loading your character collection…</p></div>
+        </div>
+        <div class="lineup-legend"><span><i class="foundation-dot"></i> FRONT ROW · MAIN RIDERS</span><span>40 PER ROW ABOVE · BOTTOM TO TOP ↑</span></div>
+        <div class="lineup-inspector" aria-live="polite" aria-atomic="true"><strong id="lineup-hover-name">HOVER OVER A RIDER</strong><span id="lineup-hover-series">Discover the name behind every legend.</span></div>
+      </section>
+
+      <div class="arena-baseline"><span>EVERY RIDER HAS A STORY.</span><div class="baseline-mark" aria-hidden="true">K<span>/</span>R</div><span>THIS ONE STARTS WITH YOU.</span></div>
+    </main>
+
+    <footer class="control-bar"><div id="select-controls" class="control-keys"><span><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> NAVIGATE</span><span><kbd>↵</kbd> CONFIRM</span><span><kbd>ESC</kbd> BACK</span><span><kbd>R</kbd> RANDOM</span></div><div id="lineup-controls" class="control-keys" hidden><span><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> EXPLORE</span><span><kbd>↵</kbd> HEAR NAME</span><span><kbd>ESC</kbd> HIDE NAME</span></div><span id="audio-note" class="audio-note">CLICK A RIDER TO HEAR THEIR NAME</span><span class="system-status"><i></i> ARENA ONLINE <b>V.01</b></span></footer>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <div id="lineup-tooltip" class="lineup-tooltip" role="tooltip" hidden><strong></strong><span></span></div>
+    <noscript><div class="noscript-notice">Enable JavaScript to enter the character select arena.</div></noscript>
+  </body>
+</html>
