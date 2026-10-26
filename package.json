@@ -1,0 +1,14 @@
+{
+  "name": "kr-character-select",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A cinematic, data-driven character selection screen.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
